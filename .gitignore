@@ -2,3 +2,4 @@
 *.war
 *.class
 *.ear
+/TTTJavaClient/build/
