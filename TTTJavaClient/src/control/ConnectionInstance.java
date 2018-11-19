@@ -14,10 +14,10 @@ import ttt.james.server.TTTWebService_Service;
  */
 public class ConnectionInstance {
     
-    private TTTWebService connection;
+    private static TTTWebService connection;
     
     
-    public TTTWebService getInstance(){
+    public static TTTWebService getInstance(){
         if(connection == null){
             connection = new TTTWebService_Service().getTTTWebServicePort();
         }

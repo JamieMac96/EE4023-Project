@@ -5,12 +5,26 @@
  */
 package control;
 
+import ttt.james.server.TTTWebService;
+import util.UserCredential;
+
 /**
  *
  * @author jamie
  */
 public class RegisterController {
-    public boolean registerUser(){
-        return false;
+    
+    private TTTWebService connection;
+    
+    public RegisterController(){
+        this.connection = ConnectionInstance.getInstance();
+    }
+    
+    public String registerUser(UserCredential credential){
+        return connection.register(
+                credential.getSurname(),
+                credential.getPassword(),
+                credential.getForename(),
+                credential.getSurname());
     }
 }

@@ -5,6 +5,7 @@
  */
 package view;
 
+import util.UserCredential;
 import control.RegisterController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,8 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
      */
     public RegisterPanel() {
         initComponents();
+        controller = new RegisterController();
+        registerButton.addActionListener(this);
     }
 
     public String getUsername(){
@@ -43,9 +46,10 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         Object o = e.getSource();
-        
+        System.out.println("IN action performed");
         if(o == registerButton){
-            controller.registerUser();
+            String result = controller.registerUser(getCredential());
+            System.out.println("RESULT: " + result);
         }
     }
     
@@ -63,10 +67,10 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         surnameField = new javax.swing.JTextField();
         forenameField = new javax.swing.JTextField();
         usernameField = new javax.swing.JTextField();
-        username = new java.awt.Label();
-        label2 = new java.awt.Label();
-        label3 = new java.awt.Label();
-        label4 = new java.awt.Label();
+        usernameLabel = new java.awt.Label();
+        forenameLabel = new java.awt.Label();
+        surnameLabel = new java.awt.Label();
+        passwordLabel = new java.awt.Label();
 
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,13 +92,13 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
             }
         });
 
-        username.setText("username");
+        usernameLabel.setText("username");
 
-        label2.setText("forename");
+        forenameLabel.setText("forename");
 
-        label3.setText("surname");
+        surnameLabel.setText("surname");
 
-        label4.setText("password");
+        passwordLabel.setText("password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,10 +107,10 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
             .addGroup(layout.createSequentialGroup()
                 .addGap(105, 105, 105)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(forenameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(surnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(registerButton)
@@ -128,16 +132,16 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(usernameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addComponent(forenameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(forenameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(surnameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(label4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(registerButton)
                 .addGap(51, 51, 51))
@@ -156,16 +160,23 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
 
-
+    private UserCredential getCredential(){
+        return new UserCredential.Builder()
+                .setUsername(getUsername())
+                .setForename(getForename())
+                .setSurname(getSurname())
+                .setPassword(getPassword())
+                .build();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField forenameField;
-    private java.awt.Label label2;
-    private java.awt.Label label3;
-    private java.awt.Label label4;
+    private java.awt.Label forenameLabel;
     private javax.swing.JPasswordField passwordField;
+    private java.awt.Label passwordLabel;
     private javax.swing.JButton registerButton;
     private javax.swing.JTextField surnameField;
-    private java.awt.Label username;
+    private java.awt.Label surnameLabel;
     private javax.swing.JTextField usernameField;
+    private java.awt.Label usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,10 +19,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="username" min="-2" max="-2" attributes="0"/>
-                  <Component id="label2" min="-2" max="-2" attributes="0"/>
-                  <Component id="label3" min="-2" max="-2" attributes="0"/>
-                  <Component id="label4" min="-2" max="-2" attributes="0"/>
+                  <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="forenameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="surnameLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -48,22 +48,22 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="usernameField" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="username" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="usernameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="forenameField" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="label2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="forenameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="surnameField" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="label3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="surnameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="passwordField" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="label4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="passwordLabel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="registerButton" min="-2" max="-2" attributes="0"/>
@@ -95,22 +95,22 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameFieldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Label" name="username">
+    <Component class="java.awt.Label" name="usernameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="username"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="label2">
+    <Component class="java.awt.Label" name="forenameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="forename"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="label3">
+    <Component class="java.awt.Label" name="surnameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="surname"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="label4">
+    <Component class="java.awt.Label" name="passwordLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="password"/>
       </Properties>

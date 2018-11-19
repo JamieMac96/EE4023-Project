@@ -25,6 +25,7 @@ public class MySQLAccess {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url);      
         } catch(Exception e) {
+            e.printStackTrace();
             exit(-1);
         }
     }
@@ -36,6 +37,7 @@ public class MySQLAccess {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url);
         } catch(Exception e) {
+            e.printStackTrace();
             exit(-1);
         }
     }
@@ -47,6 +49,7 @@ public class MySQLAccess {
             resultSet = statement.executeQuery(SQLCmd);
             result = writeResultSet(resultSet);
         } catch(Exception e) {
+            e.printStackTrace();
             return "ERROR";
         }
         return result;
@@ -58,6 +61,7 @@ public class MySQLAccess {
             int rows = preparedStatement.executeUpdate();
             return "UPDATED " + rows + " ROWS.";
         } catch(Exception e) {
+            e.printStackTrace();
             return "ERROR";
         }
     }
@@ -68,6 +72,7 @@ public class MySQLAccess {
             int rows = preparedStatement.executeUpdate();
             return "INSERTED " + rows + " ROWS.";
         } catch(Exception e) {
+            e.printStackTrace();
             return "ERROR";
         }
     }
@@ -78,6 +83,7 @@ public class MySQLAccess {
             int rows = preparedStatement.executeUpdate();
             return "REMOVED " + rows + " ROWS.";
         } catch(Exception e) {
+            e.printStackTrace();
             return "ERROR";
         }
     }
