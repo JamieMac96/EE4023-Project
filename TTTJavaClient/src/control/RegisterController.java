@@ -21,7 +21,7 @@ public class RegisterController {
     }
     
     public String registerUser(UserCredential credential){
-        System.out.println("PASSWORD ON REGISTER: " + credential.getPassword());
+        System.out.println("PASSWORD ON REGISTER: |" + credential.getPassword()  + "|");
         
         String result = connection.register(
                 credential.getSurname(),

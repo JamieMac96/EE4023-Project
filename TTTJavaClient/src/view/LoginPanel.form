@@ -24,7 +24,7 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="username" max="32767" attributes="0"/>
+                  <Component id="usernameField" max="32767" attributes="0"/>
                   <Component id="gotToRegisterButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="loginButton" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                   <Component id="passwordField" max="32767" attributes="0"/>
@@ -45,7 +45,7 @@
                       <EmptySpace type="separate" pref="18" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="username" min="-2" max="-2" attributes="0"/>
+                      <Component id="usernameField" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="passwordField" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -60,7 +60,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="username">
+    <Component class="javax.swing.JTextField" name="usernameField">
     </Component>
     <Component class="javax.swing.JButton" name="loginButton">
       <Properties>

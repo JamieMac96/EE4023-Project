@@ -28,7 +28,8 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
     }
     
     public String getUsername(){
-        return username.getText();
+        System.out.println("USERNAME FIELD: " + usernameField.getText());
+        return usernameField.getText();
     }
     
     public String getPassword(){
@@ -78,7 +79,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        username = new javax.swing.JTextField();
+        usernameField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         usernameLabel = new java.awt.Label();
         passwordLabel = new java.awt.Label();
@@ -107,7 +108,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
                     .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(username)
+                    .addComponent(usernameField)
                     .addComponent(gotToRegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordField))
@@ -124,7 +125,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
                         .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)))
@@ -143,7 +144,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private java.awt.Label passwordLabel;
-    private javax.swing.JTextField username;
+    private javax.swing.JTextField usernameField;
     private java.awt.Label usernameLabel;
     // End of variables declaration//GEN-END:variables
 

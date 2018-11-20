@@ -55,7 +55,7 @@ public class UserCredential {
         public UserCredential build(){
             UserCredential uCred = new UserCredential();
             
-            uCred.forename = this.fName;
+            uCred.forename = this.uName;
             uCred.password = this.pWord;
             uCred.forename = this.fName;
             uCred.surname = this.sName;
@@ -78,5 +78,13 @@ public class UserCredential {
 
     public String getSurname() {
         return surname;
+    }
+    
+    @Override
+    public String toString(){
+        return "Username: " + username
+                + "Password: " + password
+                + "Forename: " + forename
+                + "Surname: " + surname;
     }
 }

@@ -21,6 +21,7 @@ public class LoginController {
     }
     
     public String login(UserCredential uCred){
+        System.out.println("CREDENTIAL: " + uCred.toString());
         int result = connection.login(
                 uCred.getUsername(), 
                 uCred.getPassword());
@@ -31,6 +32,8 @@ public class LoginController {
     }
     
     private String getLoginResultMessage(int resultCode){
+        System.out.println("RESULT CODE: " + resultCode);
+        
         if(resultCode == -1 || resultCode == 0){
             return "Error: Login Failed!";
         }
