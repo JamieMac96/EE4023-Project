@@ -8,6 +8,8 @@ package view;
 import control.MainPanelController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+import javax.swing.JButton;
 
 /**
  *
@@ -140,5 +142,6 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JButton leaderboardButton;
     private javax.swing.JButton userScoresButton;
     // End of variables declaration//GEN-END:variables
+
 
 }

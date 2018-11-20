@@ -21,10 +21,29 @@ public class RegisterController {
     }
     
     public String registerUser(UserCredential credential){
-        return connection.register(
+        System.out.println("PASSWORD ON REGISTER: " + credential.getPassword());
+        
+        String result = connection.register(
                 credential.getSurname(),
                 credential.getPassword(),
                 credential.getForename(),
                 credential.getSurname());
+        
+        return getRegisterResultMessage(result);
+    }
+    
+    private String getRegisterResultMessage(String result){
+        switch (result) {
+            case "ERROR-REPEAT":
+                return "Error: This user already exists!";
+            case "ERROR-INSERT":
+                return "Error: Could not insert the new user!";
+            case "ERROR-RETRIEVE":
+                return "Error: Could not retrieve your userId";
+            case "ERROR-DB":
+                return "Error: Could not find database.";
+            default:
+                return null;
+                        }
     }
 }

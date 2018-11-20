@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.util.Map;
+import javax.swing.JButton;
+
 /**
  *
  * @author jamie

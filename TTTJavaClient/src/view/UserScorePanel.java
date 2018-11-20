@@ -5,11 +5,14 @@
  */
 package view;
 
+import java.util.Map;
+import javax.swing.JButton;
+
 /**
  *
  * @author jamie
  */
-public class UserScorePanel extends javax.swing.JPanel {
+public class UserScorePanel extends javax.swing.JPanel{
 
     /**
      * Creates new form UserScore
@@ -38,6 +41,7 @@ public class UserScorePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
