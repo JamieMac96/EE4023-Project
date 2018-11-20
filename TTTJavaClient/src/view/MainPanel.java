@@ -33,7 +33,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         Object o = e.getSource();
         
         if(o == createGameButton){
-            controller.createGame();
+            controller.createGame(11);
         }
         else if(o == joinGameButton){
             controller.joinGame();
