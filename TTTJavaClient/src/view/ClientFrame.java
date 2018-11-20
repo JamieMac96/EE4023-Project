@@ -28,7 +28,7 @@ public class ClientFrame extends JFrame implements ActionListener{
         
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(300, 300);
+        frame.setSize(400, 300);
     }
 
     @Override

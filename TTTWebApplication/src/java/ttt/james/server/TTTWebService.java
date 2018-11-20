@@ -73,12 +73,17 @@ public class TTTWebService {
             String sqlCmd = "SELECT autokey FROM tttexample.users WHERE username = '" + username;
             sqlCmd += "' AND password = PASSWORD('" + password + "') AND isactive = 1;";
             String result = dao.retrieve(sqlCmd);
+            
+            System.out.println("PASSWORD: " + password);
+            System.out.println("username: " + username);
+            System.out.println("RESULT: " + result);
             if("ERROR".equals(result)) {
                 return 0;
             } else {
                 return Integer.parseInt(result);
             }
         } catch(Exception e) {
+            e.printStackTrace();
             System.out.println("Error is : " + e.getMessage());
             return -1;
         }

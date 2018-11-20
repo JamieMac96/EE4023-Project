@@ -55,7 +55,7 @@ public class UserCredential {
         public UserCredential build(){
             UserCredential uCred = new UserCredential();
             
-            uCred.forename = this.uName;
+            uCred.username = this.uName;
             uCred.password = this.pWord;
             uCred.forename = this.fName;
             uCred.surname = this.sName;

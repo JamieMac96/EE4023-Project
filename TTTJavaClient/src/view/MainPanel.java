@@ -8,8 +8,8 @@ package view;
 import control.MainPanelController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import javax.swing.JButton;
+import navigation.NavigationHandler;
+import util.PanelNames;
 
 /**
  *
@@ -25,6 +25,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     public MainPanel() {
         controller = new MainPanelController();
         initComponents();
+        addActionListeners();
     }
     
     @Override
@@ -38,11 +39,18 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
             controller.joinGame();
         }
         else if(o == leaderboardButton){
-            //Go to leaderboard page
+            NavigationHandler.setCurrentCard(PanelNames.LEADERBOARD_PANEL);
         }
         else if(o == userScoresButton){
-            //Go to user scores page
+            NavigationHandler.setCurrentCard(PanelNames.USER_SCORE_PANEL);
         }
+        else if(o == backButton){
+            NavigationHandler.back();
+        }
+    }
+    
+    private void addActionListeners() {
+        backButton.addActionListener(this);
     }
 
     /**
@@ -62,6 +70,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         joinGameButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -93,6 +102,8 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
 
         joinGameButton.setText("Join Game");
 
+        backButton.setText("back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +113,8 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userScoresButton)
                     .addComponent(leaderboardButton)
-                    .addComponent(createGameButton))
+                    .addComponent(createGameButton)
+                    .addComponent(backButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(joinGameButton)
@@ -112,10 +124,14 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(userScoresButton)
                         .addGap(18, 18, 18)
                         .addComponent(leaderboardButton)
@@ -133,6 +149,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton createGameButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

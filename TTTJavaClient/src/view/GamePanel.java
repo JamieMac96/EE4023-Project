@@ -5,20 +5,24 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.JButton;
+import navigation.NavigationHandler;
 
 /**
  *
  * @author jamie
  */
-public class GamePanel extends javax.swing.JPanel {
+public class GamePanel extends javax.swing.JPanel implements ActionListener{
 
     /**
      * Creates new form GamePanel
      */
     public GamePanel() {
         initComponents();
+        addActionListeners();
     }
 
     /**
@@ -30,19 +34,41 @@ public class GamePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backButton = new javax.swing.JButton();
+
+        backButton.setText("back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backButton)
+                .addGap(0, 337, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backButton)
+                .addGap(0, 269, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object actionObj = e.getSource();
+        
+        if(actionObj == backButton){
+            NavigationHandler.back();
+        }
+    }
+
+    private void addActionListeners() {
+        backButton.addActionListener(this);
+    }
 }

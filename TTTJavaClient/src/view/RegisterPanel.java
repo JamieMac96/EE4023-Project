@@ -28,7 +28,7 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
     public RegisterPanel() {
         initComponents();
         controller = new RegisterController();
-        setActionListeners();
+        addActionListeners();
     }
 
     public String getUsername(){
@@ -57,6 +57,9 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         if(o == goToLoginButton){
             NavigationHandler.setCurrentCard(PanelNames.LOGIN_PANEL);
         }
+        if(o == backButton){
+            NavigationHandler.back();
+        }
     }
     
     private void handleRegisterResult(String result){
@@ -76,9 +79,10 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         dialog.setVisible(true);
     }
     
-    private void setActionListeners(){
+    private void addActionListeners(){
         registerButton.addActionListener(this);
         goToLoginButton.addActionListener(this);
+        backButton.addActionListener(this);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,6 +98,7 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         surnameLabel = new java.awt.Label();
         passwordLabel = new java.awt.Label();
         goToLoginButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +130,8 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
 
         goToLoginButton.setText("Already a Member?");
 
+        backButton.setText("back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,11 +153,17 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
                         .addComponent(usernameField)
                         .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(80, 80, 80))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +211,7 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
                 .build();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JTextField forenameField;
     private java.awt.Label forenameLabel;
     private javax.swing.JButton goToLoginButton;

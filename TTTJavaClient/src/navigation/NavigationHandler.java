@@ -6,6 +6,7 @@
 package navigation;
 
 import java.awt.CardLayout;
+import java.util.Stack;
 import javax.swing.JPanel;
 
 /**
@@ -13,10 +14,16 @@ import javax.swing.JPanel;
  * @author jamie
  */
 public class NavigationHandler {
-    public static JPanel cards;
+    private static Stack<String> backStack;
+    private static CardLayout cl;
+    private static String currentCard;
+    
+    private static JPanel cards;
     
     public static void init(){
         cards = new JPanel(new CardLayout());
+        backStack = new Stack<>();
+        cl = (CardLayout)cards.getLayout();
     }
     
     public static void addCard(JPanel card, String name){
@@ -24,9 +31,22 @@ public class NavigationHandler {
     }
     
     public static void setCurrentCard(String cardName){
-        CardLayout cl = (CardLayout)cards.getLayout();
+        if(currentCard != null){
+            backStack.push(currentCard);
+        }
         
         cl.show(cards, cardName);
+        currentCard = cardName;
+    }
+    
+    public static void back(){
+        if(!backStack.isEmpty()){
+            System.out.println("changing card");
+            cl.show(cards, backStack.pop());
+        }
+        else{
+            System.out.println("backstack EMPTY");
+        }
     }
     
     public static JPanel getCards(){
