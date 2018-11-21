@@ -20,26 +20,9 @@ public class LoginController {
         connection = ConnectionInstance.getInstance();
     }
     
-    public String login(UserCredential uCred){
-        System.out.println("CREDENTIAL: " + uCred.toString());
-        int result = connection.login(
+    public int login(UserCredential uCred){
+     return connection.login(
                 uCred.getUsername(), 
                 uCred.getPassword());
-        
-        System.out.println("PASSWORD PASSED: " + uCred.getPassword());
-        
-        return getLoginResultMessage(result);
     }
-    
-    private String getLoginResultMessage(int resultCode){
-        System.out.println("RESULT CODE: " + resultCode);
-        
-        if(resultCode == -1 || resultCode == 0){
-            return "Error: Login Failed!";
-        }
-        else{
-            return null;
-        }
-    }
-    
 }

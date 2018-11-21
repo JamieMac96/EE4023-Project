@@ -8,8 +8,11 @@ package view;
 import control.MainPanelController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 import navigation.NavigationHandler;
+import util.DialogCreator;
 import util.PanelNames;
+import util.SessionState;
 
 /**
  *
@@ -26,6 +29,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         controller = new MainPanelController();
         initComponents();
         addActionListeners();
+        populateGamesTable();
     }
     
     @Override
@@ -33,10 +37,12 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         Object o = e.getSource();
         
         if(o == createGameButton){
-            controller.createGame(11);
+            String result = controller.createGame(SessionState.getUserId());
+            handleCreateGameResult(result);
         }
         else if(o == joinGameButton){
-            controller.joinGame();
+            String result = controller.joinGame();
+            handleJoinGameResult(result);
         }
         else if(o == leaderboardButton){
             NavigationHandler.setCurrentCard(PanelNames.LEADERBOARD_PANEL);
@@ -51,8 +57,31 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     
     private void addActionListeners() {
         backButton.addActionListener(this);
+        joinGameButton.addActionListener(this);
+        leaderboardButton.addActionListener(this);
+        userScoresButton.addActionListener(this);
+        createGameButton.addActionListener(this);
     }
-
+    
+    private void handleCreateGameResult(String result){
+        try{
+            int gameId = Integer.parseInt(result);
+            SessionState.setGameId(gameId);
+        }
+        catch(NumberFormatException e){
+            DialogCreator.showErrorDialog(result);
+        }
+    }
+    
+    private void handleJoinGameResult(String result){
+        
+    }
+    
+    private void populateGamesTable(){
+        DefaultTableModel model = (DefaultTableModel)availableGamesTable.getModel();
+        model.addRow(new Object[]{"Column 1"});
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +97,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         leaderboardButton = new javax.swing.JButton();
         createGameButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        availableGamesTable = new javax.swing.JTable();
         joinGameButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
@@ -87,18 +116,15 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
 
         createGameButton.setText("Create Game");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        availableGamesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Available Games"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(availableGamesTable);
 
         joinGameButton.setText("Join Game");
 
@@ -142,19 +168,19 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
                 .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void userScoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userScoresButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userScoresButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable availableGamesTable;
     private javax.swing.JButton backButton;
     private javax.swing.JButton createGameButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton joinGameButton;
     private javax.swing.JButton leaderboardButton;
     private javax.swing.JButton userScoresButton;

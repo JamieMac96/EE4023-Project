@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import navigation.NavigationHandler;
 import util.DialogCreator;
 import util.PanelNames;
+import util.SessionState;
 import util.UserCredential;
 
 /**
@@ -44,7 +45,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
             NavigationHandler.setCurrentCard(PanelNames.REGISTER_PANEL);
         }
         if(actionObj == loginButton){
-            String result = controller.login(getLoginCredential());
+            int result = controller.login(getLoginCredential());
             handleLoginResult(result);
         }
         if(actionObj == backButton){
@@ -58,12 +59,13 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
         backButton.addActionListener(this);
     }
     
-    private void handleLoginResult(String result){
-        if(result == null){
-            NavigationHandler.setCurrentCard(PanelNames.MAIN_PANEL);
+    private void handleLoginResult(int result){
+        if(result == -1 || result == 0){
+            DialogCreator.showErrorDialog("Error! Login Failed!");
         }
         else{
-            DialogCreator.showErrorDialog(result);
+            SessionState.setUserId(result);
+            NavigationHandler.setCurrentCard(PanelNames.MAIN_PANEL);
         }
     }
     

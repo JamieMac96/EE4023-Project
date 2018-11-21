@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import navigation.NavigationHandler;
 import util.PanelNames;
+import util.SessionState;
 
 /**
  *
@@ -64,10 +65,13 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
     
     private void handleRegisterResult(String result){
         System.out.println("REGISTER RESULT: " + result);
-        if(result == null){
+        
+        try{
+            int userId = Integer.parseInt(result);
+            SessionState.setUserId(userId);
             NavigationHandler.setCurrentCard(PanelNames.MAIN_PANEL);
         }
-        else{
+        catch(NumberFormatException e){
             showErrorMessage(result);
         }
     }

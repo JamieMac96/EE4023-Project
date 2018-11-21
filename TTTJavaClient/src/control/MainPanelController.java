@@ -24,8 +24,23 @@ public class MainPanelController {
         return getCreateGameMessage(result);
     } 
     
-    public boolean joinGame(){
-        return false;
+    public String joinGame(){
+        return "";
+    }
+    
+    public GameTableItem[] getAvailableGames(){
+        String result = connection.showOpenGames();
+        
+        return parseAvailableGames(result);
+    }  
+    
+    private GameTableItem[] parseAvailableGames(String availableGames){
+        System.out.println("INPUT: " + availableGames);
+        
+        String [] rows = availableGames.split("\n");
+        
+        
+        System.out.println("OUTPUT: " );
     }
     
     private String getCreateGameMessage(String result){
@@ -39,11 +54,11 @@ public class MainPanelController {
             case "ERROR-DB":
                 return "Error: Problem connecting to database!";
             default:
-                return null;
+                return result;
         }
     }
     
     private String getJoinGameMessage(String result){
-        
+        return "";
     }
 }

@@ -7,8 +7,6 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import javax.swing.JButton;
 import navigation.NavigationHandler;
 
 /**
@@ -23,8 +21,35 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
     public GamePanel() {
         initComponents();
         addActionListeners();
+        configureBoard();
     }
-
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object actionObj = e.getSource();
+        
+        if(actionObj == backButton){
+            NavigationHandler.back();
+        }
+    }
+    
+    private void configureBoard(){
+        board00.setEditable(false);
+        board01.setEditable(false);
+        board02.setEditable(false);
+        board10.setEditable(false);
+        board11.setEditable(false);
+        board12.setEditable(false);
+        board20.setEditable(false);
+        board21.setEditable(false);
+        board22.setEditable(false);
+        board00.setText("X");
+    } 
+    
+    private void addActionListeners() {
+        backButton.addActionListener(this);
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,8 +60,51 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        addMoveButton = new javax.swing.JButton();
+        xCoordinate = new javax.swing.JTextField();
+        yCoordinate = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        board00 = new javax.swing.JTextField();
+        board10 = new javax.swing.JTextField();
+        board20 = new javax.swing.JTextField();
+        board01 = new javax.swing.JTextField();
+        board11 = new javax.swing.JTextField();
+        board21 = new javax.swing.JTextField();
+        board12 = new javax.swing.JTextField();
+        board02 = new javax.swing.JTextField();
+        board22 = new javax.swing.JTextField();
 
         backButton.setText("back");
+
+        jLabel1.setText("x");
+
+        addMoveButton.setText("Add Move");
+        addMoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMoveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("y");
+
+        board00.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board20.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board01.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board21.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board02.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        board22.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -45,30 +113,92 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
                 .addGap(0, 337, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(board00)
+                    .addComponent(xCoordinate)
+                    .addComponent(board10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(board20, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(yCoordinate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addMoveButton)
+                        .addGap(97, 97, 97))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(board01)
+                            .addComponent(board11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addComponent(board21, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(board12, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addComponent(board02)
+                            .addComponent(board22, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addGap(0, 269, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(board00, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board20, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(board02, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board22, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(board01, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(board21, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(xCoordinate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addMoveButton)
+                    .addComponent(yCoordinate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addMoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addMoveButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addMoveButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JTextField board00;
+    private javax.swing.JTextField board01;
+    private javax.swing.JTextField board02;
+    private javax.swing.JTextField board10;
+    private javax.swing.JTextField board11;
+    private javax.swing.JTextField board12;
+    private javax.swing.JTextField board20;
+    private javax.swing.JTextField board21;
+    private javax.swing.JTextField board22;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField xCoordinate;
+    private javax.swing.JTextField yCoordinate;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object actionObj = e.getSource();
-        
-        if(actionObj == backButton){
-            NavigationHandler.back();
-        }
-    }
-
-    private void addActionListeners() {
-        backButton.addActionListener(this);
-    }
 }

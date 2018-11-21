@@ -43,7 +43,7 @@ public class RegisterController {
             case "ERROR-DB":
                 return "Error: Could not find database.";
             default:
-                return null;
+                return result;
                         }
     }
 }
