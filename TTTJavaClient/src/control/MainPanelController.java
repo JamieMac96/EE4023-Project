@@ -5,7 +5,11 @@
  */
 package control;
 
+import java.util.List;
+import parse.AvailableGameParser;
+import parse.IParser;
 import ttt.james.server.TTTWebService;
+import util.IItem;
 
 /**
  *
@@ -28,20 +32,17 @@ public class MainPanelController {
         return "";
     }
     
-    public GameTableItem[] getAvailableGames(){
+    public IItem[] getAvailableGames(){
         String result = connection.showOpenGames();
         
-        return parseAvailableGames(result);
+        IParser parser = new AvailableGameParser();
+        List<IItem> itemList = parser.parseItems(result);
+        
+        IItem[] itemArray = new IItem[itemList.size()];
+        itemArray = itemList.toArray(itemArray);
+        
+        return itemArray;
     }  
-    
-    private GameTableItem[] parseAvailableGames(String availableGames){
-        System.out.println("INPUT: " + availableGames);
-        
-        String [] rows = availableGames.split("\n");
-        
-        
-        System.out.println("OUTPUT: " );
-    }
     
     private String getCreateGameMessage(String result){
         switch (result) {

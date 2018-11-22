@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import navigation.NavigationHandler;
 import util.DialogCreator;
+import util.IItem;
 import util.PanelNames;
 import util.SessionState;
 
@@ -79,7 +80,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     
     private void populateGamesTable(){
         DefaultTableModel model = (DefaultTableModel)availableGamesTable.getModel();
-        model.addRow(new Object[]{"Column 1"});
+        model.addRow(controller.getAvailableGames());
     }
     
     /**

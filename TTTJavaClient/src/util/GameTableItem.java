@@ -9,39 +9,38 @@ package util;
  *
  * @author jamie
  */
-public class GameTableItem {
+public class GameTableItem implements IItem{
     
-    private int autoKey;
-    private String username;
-    private boolean started;
+    private final int autoKey;
+    private final String username;
+    private final String started;
     
-    
-    @Override
-    public String toString(){
-        return 1 + ", " + username + ", " + started;
-    }
-
-    public int getAutoKey() {
-        return autoKey;
+    public GameTableItem(int autoKey, String username, String started){
+        this.autoKey = autoKey;
+        this.username = username;
+        this.started = started;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public boolean getStarted(){
+    public String getStarted(){
         return started;
     }
+
+    @Override
+    public int getAutoKey() {
+        return autoKey;
+    }
     
-    public void setAutoKey(int autoKey) {
-        this.autoKey = autoKey;
+    @Override
+    public String toString() {
+        return autoKey + ", " + username + ", " + started;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setStarted(boolean started) {
-        this.started = started;
+    @Override
+    public String getData() {
+        return username + ", " + started;
     }
 }
