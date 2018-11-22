@@ -28,8 +28,10 @@ public class MainPanelController {
         return getCreateGameMessage(result);
     } 
     
-    public String joinGame(){
-        return "";
+    public String joinGame(int uId, int gId){
+        String result = connection.joinGame(uId, gId);
+        
+        return getJoinGameMessage(result);
     }
     
     public IItem[] getAvailableGames(){
@@ -44,6 +46,17 @@ public class MainPanelController {
         return itemArray;
     }  
     
+    private String getJoinGameMessage(String result){
+        switch (result) {
+            case "ERROR-DB":
+                return "Error: Could not access dataase!";
+            case "0":
+                return "Error! Could not joing the game";
+            default:
+                return result;
+                        }
+    }
+    
     private String getCreateGameMessage(String result){
         switch (result) {
             case "ERROR-NOTFOUND":
@@ -57,9 +70,5 @@ public class MainPanelController {
             default:
                 return result;
         }
-    }
-    
-    private String getJoinGameMessage(String result){
-        return "";
     }
 }

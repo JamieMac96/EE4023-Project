@@ -42,8 +42,12 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
             handleCreateGameResult(result);
         }
         else if(o == joinGameButton){
-            String result = controller.joinGame();
+            int gId = getSelectedGameId();
+            String result = controller.joinGame(SessionState.getUserId(), gId);
             handleJoinGameResult(result);
+            populateGamesTable();
+            SessionState.setGameId(gId);
+            NavigationHandler.setCurrentCard(PanelNames.GAME_PANEL);
         }
         else if(o == leaderboardButton){
             NavigationHandler.setCurrentCard(PanelNames.LEADERBOARD_PANEL);
@@ -75,12 +79,24 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     }
     
     private void handleJoinGameResult(String result){
-        
+        System.out.println("RESULT: " + result);
     }
     
     private void populateGamesTable(){
+        ((DefaultTableModel)availableGamesTable.getModel()).setRowCount(0);
         DefaultTableModel model = (DefaultTableModel)availableGamesTable.getModel();
-        model.addRow(controller.getAvailableGames());
+        for(IItem item: controller.getAvailableGames()){
+            model.addRow(new IItem[]{item});
+        }
+    }
+    
+    private int getSelectedGameId(){
+        int selectedColumn = availableGamesTable.getSelectedColumn();
+        int selectedRow = availableGamesTable.getSelectedRow();
+        
+        IItem selectedItem = (IItem)availableGamesTable.getValueAt(selectedRow, selectedColumn);
+        
+        return selectedItem.getAutoKey();
     }
     
     /**
