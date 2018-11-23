@@ -44,10 +44,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         else if(o == joinGameButton){
             int gId = getSelectedGameId();
             String result = controller.joinGame(SessionState.getUserId(), gId);
-            handleJoinGameResult(result);
-            populateGamesTable();
-            SessionState.setGameId(gId);
-            NavigationHandler.setCurrentCard(PanelNames.GAME_PANEL);
+            handleJoinGameResult(result, gId);
         }
         else if(o == leaderboardButton){
             NavigationHandler.setCurrentCard(PanelNames.LEADERBOARD_PANEL);
@@ -78,8 +75,14 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         }
     }
     
-    private void handleJoinGameResult(String result){
-        System.out.println("RESULT: " + result);
+    private void handleJoinGameResult(String result, int gId){
+        if(!result.equals("1")){
+            DialogCreator.showErrorDialog(result);
+        }
+        else{
+            SessionState.setGameId(gId);
+            NavigationHandler.setCurrentCard(PanelNames.GAME_PANEL);
+        }
     }
     
     private void populateGamesTable(){

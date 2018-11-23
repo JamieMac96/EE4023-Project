@@ -14,7 +14,7 @@ import util.UserCredential;
  */
 public class RegisterController {
     
-    private TTTWebService connection;
+    private final TTTWebService connection;
     
     public RegisterController(){
         this.connection = ConnectionInstance.getInstance();

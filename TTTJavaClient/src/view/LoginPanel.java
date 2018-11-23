@@ -29,7 +29,6 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
     }
     
     public String getUsername(){
-        System.out.println("USERNAME FIELD: " + usernameField.getText());
         return usernameField.getText();
     }
     
