@@ -5,16 +5,26 @@
  */
 package view;
 
+import control.GamePanelController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JTextField;
 import navigation.NavigationHandler;
+import util.DialogCreator;
+import util.Move;
+import util.SessionState;
 
 /**
  *
  * @author jamie
  */
 public class GamePanel extends javax.swing.JPanel implements ActionListener{
-
+    
+    private GamePanelController controller;
+    private Map<Integer, JTextField> textFieldMappings;
+    
     /**
      * Creates new form GamePanel
      */
@@ -31,6 +41,11 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
         if(actionObj == backButton){
             NavigationHandler.back();
         }
+        if(actionObj == addMoveButton){
+            Move move = getMove();
+            String result = controller.addMove(move);
+            handleAddMove(result, move);
+        }
     }
     
     private void configureBoard(){
@@ -43,11 +58,55 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
         board20.setEditable(false);
         board21.setEditable(false);
         board22.setEditable(false);
-        board00.setText("X");
+        
+        textFieldMappings = new HashMap<>();
+        textFieldMappings.put(0, board00);
+        textFieldMappings.put(1, board01);
+        textFieldMappings.put(2, board02);
+        textFieldMappings.put(3, board10);
+        textFieldMappings.put(4, board11);
+        textFieldMappings.put(5, board12);
+        textFieldMappings.put(6, board20);
+        textFieldMappings.put(7, board21);
+        textFieldMappings.put(8, board22);
     } 
     
     private void addActionListeners() {
         backButton.addActionListener(this);
+        addMoveButton.addActionListener(this);
+    }
+    
+    private void handleAddMove(String result, Move move){
+        if(result == null){
+            int x = move.getxCoordinate();
+            int y = move.getyCoordinate();
+            textFieldMappings.get(x*3 + y).setText("X");
+        }
+        else{
+            DialogCreator.showErrorDialog(result);
+        }
+    }
+    
+    private Move getMove(){
+        int x;
+        int y;
+        
+        try{
+            x = Integer.parseInt(xCoordinate.getText());
+            y = Integer.parseInt(yCoordinate.getText());
+        }
+        catch(NumberFormatException e){
+            // Allow backend to catch error, and produce error message
+            x = -1;
+            y = -1;
+        }
+        
+        return new Move.Builder()
+                .setX(x)
+                .setY(y)
+                .setGameId(SessionState.getGameId())
+                .setPlayerId(SessionState.getUserId())
+                .build();
     }
             
     /**

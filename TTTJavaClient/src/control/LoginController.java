@@ -14,7 +14,7 @@ import util.UserCredential;
  */
 public class LoginController {
     
-    private TTTWebService connection;
+    private final TTTWebService connection;
     
     public LoginController(){
         connection = ConnectionInstance.getInstance();
