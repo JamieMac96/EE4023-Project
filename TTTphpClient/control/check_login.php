@@ -1,6 +1,7 @@
 <?php
 
 include_once('control/SoapClientConnection.class.php');
+include_once ('util/GameDetails.php');
 
 if(isset($_POST["loginUsername"])){
     try {
@@ -18,6 +19,8 @@ if(isset($_POST["loginUsername"])){
         else{
             session_start();
             $_SESSION['userId'] = $result;
+            $_SESSION['username'] = $_POST['loginUsername'];
+            $_SESSION['details'] = new GameDetails();
         	header("Location: main.php");
         	exit;
 		}

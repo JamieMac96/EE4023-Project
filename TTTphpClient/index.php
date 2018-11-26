@@ -1,3 +1,6 @@
+<?php include_once("control/check_login.php");?>
+<?php include_once("control/check_register.php");?>
+
 <html>
     <?php
             session_start();
@@ -19,6 +22,3 @@
   <?php include_once('includes/footer.php');?>
 
 </html>
-
-<?php include_once("control/check_login.php");?>
-<?php include_once("control/check_register.php");?>

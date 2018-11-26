@@ -1,6 +1,6 @@
 <div class="header">
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Tic-Tac-Toe EE4023</a>
             </div>

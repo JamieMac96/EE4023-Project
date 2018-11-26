@@ -6,7 +6,7 @@
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
-    width: fill;
+    width: auto;
     padding: 12px 20px;
     margin: 8px 0;
     display: block;
@@ -26,6 +26,41 @@ button {
 
 button:hover {
     opacity: 0.8;
+}
+
+table {
+    margin: 5rem;
+    width: 500px;
+    height: 500px;
+    border-collapse: collapse;
+}
+td {
+    overflow: hidden;
+    text-align: center;
+    horiz-align: left;
+    font-size: 10rem;
+    whitespace: nowrap;
+    width: 33.333%;
+    height: 33.333%;
+    border: 6px solid #222;
+}
+td:after {
+    content: '';
+    display: block;
+}
+td:first-of-type {
+    border-left-color: transparent;
+    border-top-color: transparent;
+}
+td:nth-of-type(2) {
+    border-top-color: transparent;
+}
+td:nth-of-type(3) {
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+tr:nth-of-type(3) td {
+    border-bottom-color: transparent;
 }
 
 .footer {
@@ -58,6 +93,10 @@ input {
     color: #000;
 }
 
+.blackText{
+    color:#242424;
+}
+
 .header {
     background-color: #242424;
     width: 100%;
@@ -65,10 +104,13 @@ input {
     height: 90px;
 }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto;
-    background-color: #f44336;
+.game-card {
+    border-color: #000;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 span.psw {

@@ -2,31 +2,36 @@
 include_once('SoapClientConnection.class.php');
 
 if(isset($_POST['forename'])){
-	try {
-		$client = SoapClientConnection::getInstance();
+    try {
+        $client = SoapClientConnection::getInstance();
 
-		$data['username'] = $_POST['username'];
+        $data['username'] = $_POST['username'];
         $data['name'] = $_POST['forename'];
         $data['surname'] = $_POST['surname'];
         $data['password'] = $_POST['password'];
 
-		$response = $client->register($data);
-		$result = (string) $response->return;
+        $response = $client->register($data);
+        $result = (string) $response->return;
 
-		$resultMessage = getRegisterMessage($result);
+        $resultMessage = getRegisterMessage($result);
 
-		if($resultMessage == null){
-		    $_SESSION['userId'] = $result;
-			header("Location: main.php");
-			exit;
-		}
-		else{
+        if($resultMessage == null){
+            $_SESSION['userId'] = $result;
+            $_SESSION['username'] = $_POST['username'];
+            $_SESSION['details'] = new GameDetails();
+            header("Location: main.php");
+            exit;
+        }
+        else{
             echo "<script> alert(\"'.$resultMessage.'\");</script>";
         }
 
-	} catch (Exception $e) {
-		echo $e->getMessage();
-	}
+    }
+    catch(SoapFault $sf){
+        echo $sf->getCode();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
 }
 
 function getRegisterMessage($result){
