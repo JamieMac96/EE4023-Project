@@ -6,7 +6,7 @@
 package control;
 
 import java.util.List;
-import parse.AvailableGameParser;
+import parse.GameParser;
 import parse.IParser;
 import ttt.james.server.TTTWebService;
 import util.IItem;
@@ -37,7 +37,7 @@ public class MainPanelController {
     public IItem[] getAvailableGames(){
         String result = connection.showOpenGames();
         
-        IParser parser = new AvailableGameParser();
+        IParser parser = new GameParser();
         List<IItem> itemList = parser.parseItems(result);
         
         IItem[] itemArray = new IItem[itemList.size()];

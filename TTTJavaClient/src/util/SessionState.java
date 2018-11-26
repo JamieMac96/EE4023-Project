@@ -15,9 +15,14 @@ public class SessionState {
     
     private static Integer userId;
     private static Integer gameId;
+    private static String username;
     
     public static int getUserId(){
         return userId;
+    }
+    
+    public static String getUserName(){
+        return username;
     }
     
     public static int getGameId(){
@@ -26,6 +31,10 @@ public class SessionState {
     
     public static void setUserId(Integer uId){
         userId = uId;
+    }
+    
+    public static void setUserName(String user){
+        username = user;
     }
     
     public static void setGameId(Integer gId){

@@ -6,6 +6,7 @@
 package view;
 
 import control.MainPanelController;
+import control.UserScoreController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -50,7 +51,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
             NavigationHandler.setCurrentCard(PanelNames.LEADERBOARD_PANEL);
         }
         else if(o == userScoresButton){
-            NavigationHandler.setCurrentCard(PanelNames.USER_SCORE_PANEL);
+           NavigationHandler.setCurrentCard(PanelNames.USER_SCORE_PANEL);
         }
         else if(o == backButton){
             NavigationHandler.back();

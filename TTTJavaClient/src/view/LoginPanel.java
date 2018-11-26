@@ -33,6 +33,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
     }
     
     public String getPassword(){
+        System.out.println("PASSWORD FIELD: " + passwordField.getText());
         return new String(passwordField.getPassword());
     }
     
@@ -45,6 +46,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
         }
         if(actionObj == loginButton){
             int result = controller.login(getLoginCredential());
+            System.out.println("Result: " + result);
             handleLoginResult(result);
         }
         if(actionObj == backButton){
@@ -64,6 +66,7 @@ public class LoginPanel extends javax.swing.JPanel implements ActionListener{
         }
         else{
             SessionState.setUserId(result);
+            SessionState.setUserName(this.getUsername());
             NavigationHandler.setCurrentCard(PanelNames.MAIN_PANEL);
         }
     }
