@@ -1,1 +1,0 @@
-/var/www/html/TTTphpClient/check_register.php
