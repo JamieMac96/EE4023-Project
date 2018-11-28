@@ -12,7 +12,7 @@ import navigation.NavigationHandler;
 import util.DialogCreator;
 import util.PanelNames;
 import util.SessionState;
-import util.UserCredential;
+import model.UserCredential;
 
 /**
  *

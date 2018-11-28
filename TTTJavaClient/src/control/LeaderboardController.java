@@ -10,7 +10,7 @@ import java.util.List;
 import parse.GameParser;
 import parse.IParser;
 import ttt.james.server.TTTWebService;
-import util.IItem;
+import model.IItem;
 
 /**
  *
@@ -35,16 +35,13 @@ public class LeaderboardController {
         
         if(games.length != 0) {
             
-            for(int i = 0; i < games.length; i++) {  
-                
-                game = games[i];
-                
+            for (IItem game1 : games) {
+                game = game1;
                 gameData = game.getData();
                 data = gameData.split(",");
                 gameState = data[2].trim();
                 data[0] = data[0].trim();
                 data[1] = data[1].trim();
-                
                 if(!results.containsKey(data[0])) {
                     HashMap score = initUser();
                     results.put(data[0], score);
@@ -53,29 +50,33 @@ public class LeaderboardController {
                     HashMap score = initUser();
                     results.put(data[1], score);
                 }
-                
-                if(gameState.equals("1")) {
-                   
-                    HashMap userOneScore = (HashMap) results.get(data[0]);
-                    userOneScore.put("wins", (Integer) userOneScore.get("wins") + 1);
-                    
-                    HashMap userTwoScore = (HashMap) results.get(data[1]);
-                    userTwoScore.put("losses", (Integer) userTwoScore.get("losses") + 1);
-                                        
-                }
-                else if(gameState.equals("2")) {
-                    HashMap userOneScore = (HashMap) results.get(data[0]);
-                    userOneScore.put("losses", (Integer) userOneScore.get("losses") + 1);
-                    
-                    HashMap userTwoScore = (HashMap) results.get(data[1]);
-                    userTwoScore.put("wins", (Integer) userTwoScore.get("wins") + 1);
-                }
-                else if(gameState.equals("3")) {
-                    HashMap userOneScore = (HashMap) results.get(data[0]);
-                    userOneScore.put("draws", (Integer) userOneScore.get("draws") + 1);
-                    
-                    HashMap userTwoScore = (HashMap) results.get(data[1]);
-                    userTwoScore.put("draws", (Integer) userTwoScore.get("draws") + 1);
+                switch (gameState) {
+                    case "1":
+                        {
+                            HashMap userOneScore = (HashMap) results.get(data[0]);
+                            userOneScore.put("wins", (Integer) userOneScore.get("wins") + 1);
+                            HashMap userTwoScore = (HashMap) results.get(data[1]);
+                            userTwoScore.put("losses", (Integer) userTwoScore.get("losses") + 1);
+                            break;
+                        }
+                    case "2":
+                        {
+                            HashMap userOneScore = (HashMap) results.get(data[0]);
+                            userOneScore.put("losses", (Integer) userOneScore.get("losses") + 1);
+                            HashMap userTwoScore = (HashMap) results.get(data[1]);
+                            userTwoScore.put("wins", (Integer) userTwoScore.get("wins") + 1);
+                            break;
+                        }
+                    case "3":
+                        {
+                            HashMap userOneScore = (HashMap) results.get(data[0]);
+                            userOneScore.put("draws", (Integer) userOneScore.get("draws") + 1);
+                            HashMap userTwoScore = (HashMap) results.get(data[1]);
+                            userTwoScore.put("draws", (Integer) userTwoScore.get("draws") + 1);
+                            break;
+                        }
+                    default:
+                        break;
                 }
             }
         }

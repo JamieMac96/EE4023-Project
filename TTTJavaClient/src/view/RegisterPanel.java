@@ -5,7 +5,7 @@
  */
 package view;
 
-import util.UserCredential;
+import model.UserCredential;
 import control.RegisterController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

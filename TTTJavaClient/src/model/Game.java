@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package model;
+
+import util.SessionState;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Game {
     public String opponentSymbol;
     
     
-    public Game(int gameId, int playerPosition) {
+    public Game(int gameId) {
         this.gameId = gameId;
     }
     

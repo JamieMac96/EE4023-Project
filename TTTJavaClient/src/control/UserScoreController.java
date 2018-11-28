@@ -9,7 +9,7 @@ import java.util.List;
 import parse.GameParser;
 import parse.IParser;
 import ttt.james.server.TTTWebService;
-import util.IItem;
+import model.IItem;
 import util.SessionState;
 
 /**

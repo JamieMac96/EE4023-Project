@@ -6,7 +6,7 @@
 package control;
 
 import ttt.james.server.TTTWebService;
-import util.UserCredential;
+import model.UserCredential;
 
 /**
  *

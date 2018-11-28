@@ -5,6 +5,7 @@
  */
 package util;
 
+import model.Game;
 import control.ConnectionInstance;
 import ttt.james.server.TTTWebService;
 
@@ -27,23 +28,20 @@ public class GameThread extends Thread {
     public void run() {
         synchronized(connection) {
             
-            String boardState1 = game.getBoardState();
-            String boardState2 = connection.getBoard(game.getGameId());
+            String boardStateOne = game.getBoardState();
+            String boardStateTwo = connection.getBoard(game.getGameId());
             
             if(!game.playable){
-                if(!boardState1.equals(boardState2)){ 
+                if(!boardStateOne.equals(boardStateTwo)){ 
                     game.setPlayable(true);
-                    game.setBoardState(boardState2);
+                    game.setBoardState(boardStateTwo);
                
                 }
-                else if(boardState1.equals(boardState2)){
-                    game.setPlayable(false);   
-                }  
             }
             else if(game.getPlayable()){
-                if(!boardState1.equals(boardState2)){ 
+                if(!boardStateOne.equals(boardStateTwo)){ 
                     game.setPlayable(false);
-                    game.setBoardState(boardState2);
+                    game.setBoardState(boardStateTwo);
                 }
             }
         }

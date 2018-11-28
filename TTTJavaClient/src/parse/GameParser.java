@@ -5,12 +5,12 @@
  */
 package parse;
 
+import model.GameTableItem;
 import java.util.List;
 import java.util.ArrayList;
-import util.GameItem;
-import util.GameTableItem;
-import util.IItem;
-import util.LeaderBoardItem;
+import model.GameItem;
+import model.IItem;
+import model.LeaderBoardItem;
 
 /**
  *

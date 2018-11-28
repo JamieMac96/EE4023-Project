@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import navigation.NavigationHandler;
 import ttt.james.server.TTTWebService;
 import util.DialogCreator;
-import util.Game;
-import util.IItem;
+import model.Game;
+import model.IItem;
 import util.PanelNames;
 import util.SessionState;
 
@@ -75,7 +75,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         //try{
             int gameId = Integer.parseInt(result);
             SessionState.setGameId(gameId);
-            Game createdGame = new Game(gameId, 1);
+            Game createdGame = new Game(gameId);
             createdGame.setPlayable(true);
             createdGame.setUserOne(SessionState.getUserName());
             createdGame.setUserToPlay(SessionState.getUserName());
@@ -95,7 +95,7 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         }
         else{
             SessionState.setGameId(gId);
-            Game joinedGame = new Game(gId, 2);
+            Game joinedGame = new Game(gId);
             joinedGame.setPlayable(false);
             joinedGame.setUserTwo(SessionState.getUserName());
             joinedGame.setGameState(0);

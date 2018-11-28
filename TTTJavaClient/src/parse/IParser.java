@@ -5,7 +5,7 @@
  */
 package parse;
 import java.util.List;
-import util.IItem;
+import model.IItem;
 
 /**
  *

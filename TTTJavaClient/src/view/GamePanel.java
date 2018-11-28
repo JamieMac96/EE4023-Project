@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 import navigation.NavigationHandler;
 import ttt.james.server.TTTWebService;
 import util.DialogCreator;
-import util.Game;
-import util.Move;
+import model.Game;
+import model.Move;
 import util.SessionState;
 
 /**

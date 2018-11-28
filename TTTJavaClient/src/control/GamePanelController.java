@@ -8,9 +8,9 @@ package control;
 import java.util.Timer;
 import java.util.TimerTask;
 import ttt.james.server.TTTWebService;
-import util.Game;
+import model.Game;
 import util.GameThread;
-import util.Move;
+import model.Move;
 import util.SessionState;
 import view.GamePanel;
 
@@ -123,16 +123,13 @@ public class GamePanelController {
     public void waitToPlay(){             
        GameThread gameThread = new GameThread(game);
        gameThread.start();
-       if(!connection.getGameState(SessionState.getGameId()).equals("0")){
-           game.setPlayable(false);
-       }
        
-        try{                 
-            gameThread.join();
+       try{                 
+           gameThread.join();
 
-        }catch (InterruptedException e) {
-            System.out.println("Error, Interrupted.");
-        }
+       }catch (InterruptedException e) {
+           System.out.println("Error, Interrupted.");
+       }
    }
     
     public void updateBoardView(){

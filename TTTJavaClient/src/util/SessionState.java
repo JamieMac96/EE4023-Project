@@ -5,6 +5,7 @@
  */
 package util;
 
+import model.Game;
 import view.GamePanel;
 
 /**
