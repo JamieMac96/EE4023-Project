@@ -5,7 +5,7 @@
  */
 package util;
 
-import java.util.Map;
+import view.GamePanel;
 
 /**
  *
@@ -16,6 +16,7 @@ public class SessionState {
     private static Integer userId;
     private static Integer gameId;
     private static String username;
+    private static Game game;
     
     public static int getUserId(){
         return userId;
@@ -27,6 +28,10 @@ public class SessionState {
     
     public static int getGameId(){
         return gameId;
+    }
+    
+    public static Game getGame() {
+        return game;
     }
     
     public static void setUserId(Integer uId){
@@ -41,8 +46,14 @@ public class SessionState {
         gameId = gId;
     }
     
+    public static void setGame(Game g) {
+        game = g;
+    }
+    
     public static void reset(){
         userId = null;
         gameId = null;
+        username = null;
+        game = null;
     }
 }

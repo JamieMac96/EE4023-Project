@@ -6,13 +6,11 @@
 package control;
 
 import java.util.List;
-import parse.AllGamesParser;
 import parse.GameParser;
 import parse.IParser;
 import ttt.james.server.TTTWebService;
 import util.IItem;
 import util.SessionState;
-import util.UserCredential;
 
 /**
  *
@@ -20,7 +18,7 @@ import util.UserCredential;
  */
 public class UserScoreController {
     
-    private TTTWebService connection;
+    private final TTTWebService connection;
     
     public UserScoreController(){
         this.connection = ConnectionInstance.getInstance();
@@ -36,33 +34,34 @@ public class UserScoreController {
         IItem game;
         
         if(games.length != 0) {
-            for(int i = 0; i < games.length; i++) {
-                game = games[i];
+            for (IItem game1 : games) {
+                game = game1;
                 gameState = connection.getGameState(game.getAutoKey());
                 gameData = game.getData();
                 data = gameData.split(",");
                 System.out.println("Data[0]: " + data[0] + " Data[1]: " + data[1]);
-                if(gameState.equals("1")) {
-                   if(data[0].equals(username))
-                        wins++;
-                   else if(data[1].equals(username))
-                        losses++;
-                }
-                else if(gameState.equals("2")) {
-                   if(data[0].equals(username))
-                        losses++;
-                    else if(data[1].equals(username))
-                        wins++;
-                }
-                else if(gameState.equals("3")) {
-                    draws++;
+                switch (gameState) {
+                    case "1":
+                        if(data[0].equals(username))
+                            wins++;
+                        else if(data[1].equals(username))
+                            losses++;
+                        break;
+                    case "2":
+                        if(data[0].equals(username))
+                            losses++;
+                        else if(data[1].equals(username))
+                            wins++;
+                        break;
+                    case "3":
+                        draws++;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
         
-        System.out.println("Wins = " + wins);
-        System.out.println("Losses = " + losses);
-        System.out.println("Draws = " + draws);
         result[0] = wins;
         result[1] = losses;
         result[2] = draws;
@@ -71,7 +70,6 @@ public class UserScoreController {
     
     private IItem[] getAllGames(int uid){
         String result = connection.showAllMyGames(uid);
-        System.out.println("Show all: " + result + " for uid: " + uid);
         
         IParser parser = new GameParser();
         List<IItem> itemList = parser.parseItems(result);

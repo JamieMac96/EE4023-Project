@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import navigation.NavigationHandler;
 import util.PanelNames;
-import util.SessionState;
 
 /**
  *

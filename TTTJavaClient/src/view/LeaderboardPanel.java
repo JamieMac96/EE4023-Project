@@ -31,6 +31,7 @@ public class LeaderboardPanel extends javax.swing.JPanel implements ActionListen
     private void showLeaderBoard() {
         HashMap scores = leaderboardController.getScores();
         Iterator it = scores.entrySet().iterator();
+        leaderboard.clear();
         
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();

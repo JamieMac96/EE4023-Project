@@ -29,14 +29,18 @@ public class GameParser implements IParser{
         for(String row : rows){
             String[] rowItems = row.split(",");
             int id = Integer.parseInt(rowItems[0]);
-            if(rowItems.length == 3) {
-                items.add(new GameTableItem(id, rowItems[1], rowItems[2]));
-            }
-            else if(rowItems.length == 4) {
-                items.add(new GameItem(id, rowItems[1], rowItems[2], rowItems[3]));
-            }
-            else if(rowItems.length == 5) {
-                items.add(new LeaderBoardItem(id, rowItems[1], rowItems[2], rowItems[3], rowItems[4]));
+            switch (rowItems.length) {
+                case 3:
+                    items.add(new GameTableItem(id, rowItems[1], rowItems[2]));
+                    break;
+                case 4:
+                    items.add(new GameItem(id, rowItems[1], rowItems[2], rowItems[3]));
+                    break;
+                case 5:
+                    items.add(new LeaderBoardItem(id, rowItems[1], rowItems[2], rowItems[3], rowItems[4]));
+                    break;
+                default:
+                    break;
             }
         }
         System.out.println("DATA BACK: " + items);

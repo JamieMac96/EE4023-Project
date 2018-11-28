@@ -5,13 +5,16 @@
  */
 package view;
 
+import control.ConnectionInstance;
+import control.GamePanelController;
 import control.MainPanelController;
-import control.UserScoreController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import navigation.NavigationHandler;
+import ttt.james.server.TTTWebService;
 import util.DialogCreator;
+import util.Game;
 import util.IItem;
 import util.PanelNames;
 import util.SessionState;
@@ -25,13 +28,15 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     /**
      * Creates new form MainScreen
      */
-    private MainPanelController controller;
+    private final MainPanelController controller;
+    private TTTWebService connection;
     
     public MainPanel() {
         controller = new MainPanelController();
         initComponents();
         addActionListeners();
         populateGamesTable();
+        connection = ConnectionInstance.getInstance();
     }
     
     @Override
@@ -67,13 +72,21 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
     }
     
     private void handleCreateGameResult(String result){
-        try{
+        //try{
             int gameId = Integer.parseInt(result);
             SessionState.setGameId(gameId);
-        }
-        catch(NumberFormatException e){
-            DialogCreator.showErrorDialog(result);
-        }
+            Game createdGame = new Game(gameId, 1);
+            createdGame.setPlayable(true);
+            createdGame.setUserOne(SessionState.getUserName());
+            createdGame.setUserToPlay(SessionState.getUserName());
+            createdGame.setGameState(-1);
+            createdGame.setBoardState(connection.getBoard(gameId));
+            SessionState.setGame(createdGame);
+            NavigationHandler.setCurrentCard(PanelNames.GAME_PANEL);
+//        }
+//        catch(NumberFormatException e){
+//            DialogCreator.showErrorDialog(result);
+//        }
     }
     
     private void handleJoinGameResult(String result, int gId){
@@ -82,6 +95,12 @@ public class MainPanel extends javax.swing.JPanel implements ActionListener{
         }
         else{
             SessionState.setGameId(gId);
+            Game joinedGame = new Game(gId, 2);
+            joinedGame.setPlayable(false);
+            joinedGame.setUserTwo(SessionState.getUserName());
+            joinedGame.setGameState(0);
+            joinedGame.setBoardState(connection.getBoard(gId));
+            SessionState.setGame(joinedGame);
             NavigationHandler.setCurrentCard(PanelNames.GAME_PANEL);
         }
     }
