@@ -5,14 +5,19 @@
  */
 package view;
 
+import control.ConnectionInstance;
 import control.GamePanelController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JTextField;
 import navigation.NavigationHandler;
+import ttt.james.server.TTTWebService;
 import util.DialogCreator;
+import util.Game;
 import util.Move;
 import util.SessionState;
 
@@ -22,8 +27,9 @@ import util.SessionState;
  */
 public class GamePanel extends javax.swing.JPanel implements ActionListener{
     
-    private GamePanelController controller;
+    private final GamePanelController controller;
     private Map<Integer, JTextField> textFieldMappings;
+    private TTTWebService connection;
     
     /**
      * Creates new form GamePanel
@@ -32,6 +38,8 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
         initComponents();
         addActionListeners();
         configureBoard();
+        controller = new GamePanelController(this);
+        connection = ConnectionInstance.getInstance();
     }
     
     @Override
@@ -43,6 +51,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
         }
         if(actionObj == addMoveButton){
             Move move = getMove();
+            System.out.println(move);
             String result = controller.addMove(move);
             handleAddMove(result, move);
         }
@@ -77,13 +86,48 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
     }
     
     private void handleAddMove(String result, Move move){
-        if(result == null){
+        Game game = SessionState.getGame();
+        System.out.println("Result: " + result);
+        if(null == result){
             int x = move.getxCoordinate();
             int y = move.getyCoordinate();
-            textFieldMappings.get(x*3 + y).setText("X");
+            textFieldMappings.get(x*3 + y).setText(game.getPlayerSymbol());
         }
-        else{
-            DialogCreator.showErrorDialog(result);
+        else switch (result) {
+            case "0":
+                DialogCreator.showErrorDialog("Not your turn!");
+                break;
+            case "1":
+                DialogCreator.showErrorDialog("Square already taken!");
+                break;
+            case "2":
+                DialogCreator.showErrorDialog("Waiting for an opponent!");
+                break;
+            default:
+                break;
+        }
+        System.out.println("Game user one:" + SessionState.getGame().getUserOne());
+        System.out.println("Game user two:" + SessionState.getGame().getUserTwo());
+        
+    }
+    
+    public void updateBoard() {
+        String data = connection.getBoard(SessionState.getGameId());
+        if(!data.equals("ERROR-NOMOVES")) {
+            String [] rows = data.split("\n");
+                 for(String row : rows){
+                        String[] rowItems = row.split(",");
+                        String id = rowItems[0];
+                        int x = Integer.parseInt(rowItems[1]);
+                        int y = Integer.parseInt(rowItems[2]);
+                        if(id.trim().equals(Integer.toString(SessionState.getUserId()))) {
+                            textFieldMappings.get(x*3 + y).setText(SessionState.getGame().getPlayerSymbol());
+                        }
+                        else {
+                            textFieldMappings.get(x*3 + y).setText(SessionState.getGame().getOpponentSymbol());
+                        }
+                       
+                }
         }
     }
     
@@ -170,24 +214,24 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(backButton)
-                .addGap(0, 337, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(board00)
-                    .addComponent(xCoordinate)
-                    .addComponent(board10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(board20, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(board00)
+                            .addComponent(xCoordinate)
+                            .addComponent(board10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addComponent(board20, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)))
+                    .addComponent(backButton))
                 .addGap(40, 40, 40)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(yCoordinate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(addMoveButton)
                         .addGap(97, 97, 97))
                     .addGroup(layout.createSequentialGroup()

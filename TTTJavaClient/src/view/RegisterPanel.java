@@ -69,6 +69,7 @@ public class RegisterPanel extends javax.swing.JPanel implements ActionListener{
         try{
             int userId = Integer.parseInt(result);
             SessionState.setUserId(userId);
+            SessionState.setUserName(this.getUsername());
             NavigationHandler.setCurrentCard(PanelNames.MAIN_PANEL);
         }
         catch(NumberFormatException e){

@@ -5,10 +5,12 @@
  */
 package view;
 
+import control.LeaderboardController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import javax.swing.JButton;
 import navigation.NavigationHandler;
 
 /**
@@ -17,12 +19,25 @@ import navigation.NavigationHandler;
  */
 public class LeaderboardPanel extends javax.swing.JPanel implements ActionListener{
 
-    /**
-     * Creates new form Leaderboard
-     */
+    private final LeaderboardController leaderboardController;
+    
+    
     public LeaderboardPanel() {
+        leaderboardController = new LeaderboardController();
         initComponents();
         addActionListeners();
+    }
+    
+    private void showLeaderBoard() {
+        HashMap scores = leaderboardController.getScores();
+        Iterator it = scores.entrySet().iterator();
+        leaderboard.clear();
+        
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            leaderboard.add(pair.getKey() + " = " + pair.getValue());
+            it.remove();
+        }
     }
 
     /**
@@ -37,22 +52,42 @@ public class LeaderboardPanel extends javax.swing.JPanel implements ActionListen
         backButton = new javax.swing.JButton();
         leaderboard = new java.awt.List();
         leaderboardLabel = new javax.swing.JLabel();
+        showScores = new javax.swing.JButton();
 
         backButton.setText("back");
 
+        leaderboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leaderboardActionPerformed(evt);
+            }
+        });
+
         leaderboardLabel.setText("Leaderboard");
+
+        showScores.setText("show");
+        showScores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showScoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(showScores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(leaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(leaderboardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addComponent(leaderboardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(leaderboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,17 +96,29 @@ public class LeaderboardPanel extends javax.swing.JPanel implements ActionListen
                     .addComponent(backButton)
                     .addComponent(leaderboardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addComponent(leaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(leaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showScores))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void leaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaderboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_leaderboardActionPerformed
+
+    private void showScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScoresActionPerformed
+        System.out.println("Get leaderboard");
+        showLeaderBoard();
+    }//GEN-LAST:event_showScoresActionPerformed
+  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private java.awt.List leaderboard;
     private javax.swing.JLabel leaderboardLabel;
+    private javax.swing.JButton showScores;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -80,6 +127,10 @@ public class LeaderboardPanel extends javax.swing.JPanel implements ActionListen
         
         if(actionObj == backButton){
             NavigationHandler.back();
+        }
+        if(actionObj == showScores) {
+            System.out.println("Get leaderboard");
+            showLeaderBoard();
         }
     }
     
